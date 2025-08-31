@@ -13,7 +13,7 @@ const ContributionForm: React.FC<ContributionFormProps> = ({ campaignId, onSucce
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  // const {account:activeAccount} = useWallet()
+  const {account: activeAccount} = useWallet();
   
   const { contributeToCampaign } = useCampaigns();
   
@@ -28,7 +28,10 @@ const ContributionForm: React.FC<ContributionFormProps> = ({ campaignId, onSucce
       return;
     }
     
-    const activeAccount = '0x5423a296f739218f0d71464183331F8884f48Bd5'
+    if (!activeAccount) {
+      setError('Please connect your wallet first');
+      return;
+    }
     // Simulate wallet connection and transaction
     setIsProcessing(true);
     
@@ -66,7 +69,7 @@ const ContributionForm: React.FC<ContributionFormProps> = ({ campaignId, onSucce
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="amount" className="block text-sm font-medium text-gray-700 mb-1">
-              Amount (USDC)
+              Amount (LSK)
             </label>
             <div className="relative rounded-md shadow-sm">
               <input
@@ -81,7 +84,7 @@ const ContributionForm: React.FC<ContributionFormProps> = ({ campaignId, onSucce
                 onChange={(e) => setAmount(e.target.value)}
               />
               <div className="absolute inset-y-0 left-15 pl-15 flex items-center pointer-events-none">
-                <span className="text-gray-500 sm:text-sm">ETH</span>
+                <span className="text-gray-500 sm:text-sm">LSK</span>
               </div>
             </div>
             {error && <p className="mt-2 text-sm text-red-600">{error}</p>}
@@ -97,9 +100,9 @@ const ContributionForm: React.FC<ContributionFormProps> = ({ campaignId, onSucce
           
           <button
             type="submit"
-            disabled={isProcessing || amount === ''}
+            disabled={isProcessing || amount === '' || !activeAccount}
             className={`w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-              isProcessing || amount === '' ? 'opacity-70 cursor-not-allowed' : ''
+              isProcessing || amount === '' || !activeAccount ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
             {isProcessing ? (
@@ -110,6 +113,8 @@ const ContributionForm: React.FC<ContributionFormProps> = ({ campaignId, onSucce
                 </svg>
                 Processing...
               </>
+            ) : !activeAccount ? (
+              'Connect Wallet to Contribute'
             ) : (
               'Contribute Now'
             )}
