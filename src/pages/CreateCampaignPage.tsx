@@ -328,7 +328,7 @@ const CreateCampaignPage: React.FC = () => {
               
               <div>
                 <label htmlFor="goalAmount" className="block text-sm font-medium text-gray-700">
-                  Funding Goal (USDC)*
+                  Funding Goal (LSK)
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <input
@@ -342,12 +342,12 @@ const CreateCampaignPage: React.FC = () => {
                         ? 'border-red-300 focus:ring-red-500 focus:border-red-500' 
                         : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'
                     }`}
-                    placeholder="0.5"
-                    min="0.01"
-                    step="0.01"
+                    placeholder="120 LSK"
+                    min="1"
+                    step="1"
                   />
                    <div className="absolute inset-y-0 left-0 pl-7 flex items-center pointer-events-none">
-                    <span className="text-gray-500 sm:text-sm">USDC</span>
+                    <span className="text-gray-500 sm:text-sm"></span>
                   </div>
                 </div>
                 {errors.goalAmount && (

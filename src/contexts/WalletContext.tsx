@@ -7,7 +7,7 @@ interface WalletContextType {
   disconnectWallet: () => void;
   isConnecting: boolean;
   chainId: number | null;
-  switchToSepolia: () => Promise<void>;
+  switchToLiskSepolia: () => Promise<void>;
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
@@ -41,24 +41,24 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   };
 
-  const switchToSepolia = async () => {
+  const switchToLiskSepolia = async () => {
     if (!window.ethereum) return;
 
     try {
       await window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0xaa36a7' }], // Sepolia chainId
+        params: [{ chainId: '0x106a' }], // Lisk chainId
       });
     } catch (error: any) {
       if (error.code === 4902) {
         await window.ethereum.request({
           method: 'wallet_addEthereumChain',
           params: [{
-            chainId: '0xaa36a7',
-            chainName: 'Sepolia',
+            chainId: '0x106a',
+            chainName: 'liskSepolia',
             nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
-            rpcUrls: ['https://sepolia.infura.io/v3/'],
-            blockExplorerUrls: ['https://sepolia.etherscan.io'],
+            rpcUrls: ['https://rpc.sepolia-api.lisk.com'],
+            blockExplorerUrls: ['https://blockscout.lisk.com'],
           }],
         });
       }
@@ -98,7 +98,7 @@ export const WalletProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       disconnectWallet,
       isConnecting,
       chainId,
-      switchToSepolia
+      switchToLiskSepolia
     }}>
       {children}
     </WalletContext.Provider>

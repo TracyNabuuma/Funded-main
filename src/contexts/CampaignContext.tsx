@@ -49,25 +49,25 @@ const initialCampaigns: Campaign[] = [
     ],
     createdAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString()
   },
-  {
-    id: '2',
-    title: 'Community Garden Initiative',
-    description: 'Help us transform vacant lots in our neighborhood into productive community gardens that provide fresh food and green spaces.',
-    longDescription: 'The Community Garden Initiative aims to convert five vacant lots in underprivileged neighborhoods into vibrant community gardens. These spaces will serve as sources of fresh produce for local residents, educational hubs for schools, and community gathering spots.\\n\\nYour contributions will help us secure land use permissions, purchase soil, seeds, and tools, and build basic infrastructure such as raised beds, water systems, and pathways. We\'ll also implement educational programs for local schools and community groups.\\n\\nWith your support, we can create sustainable green spaces that promote food security, environmental education, and community cohesion.',
-    creator: '0x2345678901abcdef2345678901abcdef23456789',
-    creatorName: 'Green Futures Collective',
-    goalAmount: 10.5,
-    currentAmount: 3.23,
-    deadline: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000).toISOString(), // 45 days from now
-    imageUrl: 'https://images.pexels.com/photos/2286895/pexels-photo-2286895.jpeg',
-    category: 'Environment',
-    contributors: [
-      { address: '0xcdef1234567890abcdef1234567890abcdef1234', amount: 1.2 },
-      { address: '0x4567890abcdef1234567890abcdef1234567890a', amount: 2 },
-      { address: '0xef1234567890abcdef1234567890abcdef123456', amount: 2.3 }
-    ],
-    createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
-  },
+  // {
+  //   id: '2',
+  //   title: 'Community Garden Initiative',
+  //   description: 'Help us transform vacant lots in our neighborhood into productive community gardens that provide fresh food and green spaces.',
+  //   longDescription: 'The Community Garden Initiative aims to convert five vacant lots in underprivileged neighborhoods into vibrant community gardens. These spaces will serve as sources of fresh produce for local residents, educational hubs for schools, and community gathering spots.\\n\\nYour contributions will help us secure land use permissions, purchase soil, seeds, and tools, and build basic infrastructure such as raised beds, water systems, and pathways. We\'ll also implement educational programs for local schools and community groups.\\n\\nWith your support, we can create sustainable green spaces that promote food security, environmental education, and community cohesion.',
+  //   creator: '0x2345678901abcdef2345678901abcdef23456789',
+  //   creatorName: 'Green Futures Collective',
+  //   goalAmount: 2010,
+  //   currentAmount: 94.23,
+  //   deadline: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000).toISOString(), // 45 days from now
+  //   imageUrl: 'https://images.pexels.com/photos/2286895/pexels-photo-2286895.jpeg',
+  //   category: 'Environment',
+  //   contributors: [
+  //     { address: '0xcdef1234567890abcdef1234567890abcdef1234', amount: 1.2 },
+  //     { address: '0x4567890abcdef1234567890abcdef1234567890a', amount: 2 },
+  //     { address: '0xef1234567890abcdef1234567890abcdef123456', amount: 2.3 }
+  //   ],
+  //   createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString()
+  // },
   {
     id: '3',
     title: 'Accessible Education Platform',
@@ -75,8 +75,8 @@ const initialCampaigns: Campaign[] = [
     longDescription: 'Our Accessible Education Platform is designed to break down barriers to education by providing high-quality learning materials to anyone with internet access. We focus particularly on reaching students in underserved regions where educational resources are limited.\\n\\nThe platform will feature interactive courses in core subjects, developed by qualified educators and optimized for low-bandwidth environments. Courses will be available in multiple languages and accommodate various learning styles and accessibility needs.\\n\\nFunds raised will support content development, platform engineering, translation services, and offline access capabilities. With your help, we can democratize education and empower learners worldwide.',
     creator: '0x3456789012abcdef3456789012abcdef34567890',
     creatorName: 'EduAccess Foundation',
-    goalAmount: 7,
-    currentAmount: 2.3,
+    goalAmount: 1000,
+    currentAmount: 35,
     deadline: new Date(Date.now() + 20 * 24 * 60 * 60 * 1000).toISOString(), // 20 days from now
     imageUrl: 'https://res.cloudinary.com/dfxpx7go7/image/upload/v1751029389/download_4_lfb8gn.jpg',
     category: 'Education',
@@ -94,14 +94,14 @@ const initialCampaigns: Campaign[] = [
     longDescription: 'We\'ve developed a portable, low-cost diagnostic device specifically designed for healthcare providers in rural and remote areas where laboratory infrastructure is limited or nonexistent. This innovation can diagnose common ailments through simple tests that provide rapid results, allowing for faster treatment decisions and better patient outcomes.\\n\\nThe device uses minimal power, can be charged via solar energy, and is ruggedized for harsh conditions. It comes with an intuitive interface that requires minimal training to operate effectively.\\n\\nFunding will help us finalize the prototype, conduct field testing in partnership with rural healthcare providers, obtain necessary regulatory approvals, and begin initial production. Our goal is to make this life-saving technology available to the communities that need it most.',
     creator: '0x4567890123abcdef4567890123abcdef45678901',
     creatorName: 'MedTech for All',
-    goalAmount: 11,
-    currentAmount: 2.1,
+    goalAmount: 3000000,
+    currentAmount: 2240,
     deadline: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000).toISOString(), // 60 days from now
     imageUrl: 'https://images.pexels.com/photos/3376790/pexels-photo-3376790.jpeg',
     category: 'Healthcare',
     contributors: [
-      { address: '0xabcdef1234567890abcdef1234567890abcdef12', amount: 0.4 },
-      { address: '0x0abcdef1234567890abcdef1234567890abcdef1', amount: 2.3 }
+      { address: '0xabcdef1234567890abcdef1234567890abcdef12', amount: 1000 },
+      { address: '0x0abcdef1234567890abcdef1234567890abcdef1', amount: 1240 }
     ],
     createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString()
   }
