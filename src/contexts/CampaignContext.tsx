@@ -1,18 +1,18 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { Campaign, MockCampaign } from '../types/Campaign';
 import {createWalletClient,createPublicClient,http,custom, parseEther} from 'viem'
-import { sepolia } from 'viem/chains';
+import { liskSepolia } from 'viem/chains';
 import { FundedABI, FundedAddress } from './Fundedconfig';
 import {useWallet} from './WalletContext';
 
 
 const FundedPublicClient = createPublicClient({
-  chain: sepolia,
+  chain: liskSepolia,
   transport:http()
 })
 
 const FundedWalletClient = createWalletClient({
-  chain:sepolia,
+  chain:liskSepolia,
   transport: custom(window.ethereum)
 })
 

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useCampaigns } from '../contexts/CampaignContext';
 import { useWallet } from '../contexts/WalletContext';
+import { createWalletClient, custom, parseEther } from 'viem';
+import { liskSepolia } from 'viem/chains';
+import { FundedABI, FundedAddress } from '../contexts/Fundedconfig';
 
 interface ContributionFormProps {
   campaignId: string;
@@ -32,13 +35,32 @@ const ContributionForm: React.FC<ContributionFormProps> = ({ campaignId, onSucce
       setError('Please connect your wallet first');
       return;
     }
-    // Simulate wallet connection and transaction
+    
+    // Execute actual blockchain transaction
     setIsProcessing(true);
     
-    // Simulate transaction delay
-    setTimeout(() => {
+    const executeTransaction = async () => {
       try {
+        // Create wallet client for transaction
+        const walletClient = createWalletClient({
+          chain: liskSepolia,
+          transport: custom(window.ethereum)
+        });
+        
+        // Execute blockchain transaction
+        const hash = await walletClient.writeContract({
+          address: FundedAddress,
+          abi: FundedABI,
+          functionName: "contribute",
+          args: [campaignId],
+          account: activeAccount,
+          value: parseEther(amountValue.toString())
+        });
+        
+        console.log('Transaction hash:', hash);
+        
         contributeToCampaign(campaignId, amountValue, activeAccount);
+        
         setIsProcessing(false);
         setIsSuccess(true);
         setAmount('');
@@ -48,12 +70,15 @@ const ContributionForm: React.FC<ContributionFormProps> = ({ campaignId, onSucce
           setIsSuccess(false);
           if (onSuccess) onSuccess();
         }, 3000);
+        
       } catch (err) {
         setIsProcessing(false);
         setError('Transaction failed. Please try again.');
-        console.error(err);
+        console.error('Transaction error:', err);
       }
-    }, 1500);
+    };
+    
+    executeTransaction();
   };
   
   return (
