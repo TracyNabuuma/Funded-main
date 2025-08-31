@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useCampaigns } from '../contexts/CampaignContext';
 import { AlertCircle, CheckCircle } from 'lucide-react';
 import { MockCampaign } from '../types/Campaign';
-import { ethers, parseEther,BrowserProvider } from 'ethers';
-import {createWalletClient,createPublicClient,http,custom,formatEther} from 'viem'
-import {sepolia} from 'viem/chains'
+import { ethers, BrowserProvider } from 'ethers';
+import {createWalletClient,createPublicClient,http,custom,formatEther,parseEther} from 'viem'
+import {liskSepolia} from 'viem/chains'
 import { walletConnect } from 'wagmi/connectors';
 import {FundedABI,FundedAddress} from "../contexts/Fundedconfig"
 import { useWallet } from '../contexts/WalletContext';
@@ -13,12 +13,12 @@ import { useWallet } from '../contexts/WalletContext';
 
 
 const WalletClient = createWalletClient({
-  chain:sepolia,
+  chain:liskSepolia,
   transport: custom(window.ethereum)
 })
 
 const PublicClient = createPublicClient({
-  chain:sepolia,
+  chain:liskSepolia,
   transport: http()
 })
 
@@ -119,12 +119,14 @@ const CreateCampaignPage: React.FC = () => {
       return;
     }
     
+    if (!activeAccount) {
+      setErrors(prev => ({ ...prev, submit: 'Please connect your wallet first.' }));
+      return;
+    }
+    
     setIsSubmitting(true);
 
     try {
-      // Generate a mock wallet address - in a real app, this would come from a connected wallet
-      
-
       const Hash  = await WalletClient.writeContract({
           address: FundedAddress,
           abi: FundedABI,
@@ -429,9 +431,9 @@ const CreateCampaignPage: React.FC = () => {
             <div className="flex justify-end">
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !activeAccount}
                 className={`px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 ${
-                  isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
+                  isSubmitting || !activeAccount ? 'opacity-70 cursor-not-allowed' : ''
                 }`}
               >
                 {isSubmitting ? (
@@ -442,6 +444,8 @@ const CreateCampaignPage: React.FC = () => {
                     </svg>
                     Creating Campaign...
                   </>
+                ) : !activeAccount ? (
+                  'Connect Wallet to Create Campaign'
                 ) : (
                   'Create Campaign'
                 )}
